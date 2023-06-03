@@ -7,8 +7,144 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    /* font-family:Verdana, Geneva, Tahoma, sans-serif; */
 }
 
+body {
+    background-color: rgb(114, 114, 199);
+    overflow: hidden;
+}
+
+/* APP BOX  */
+
+.wrap {
+
+    background-color: white;
+
+    /* centring the div  */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+
+    border-radius: 7px;
+    /* width: max-content; */
+
+}
+
+/* ADD TASK DIV  */
+
+.task-input {
+    height: 45px;
+    padding: 0 10px;
+    position: relative;
+    /* padding-top: 10px; */
+}
+
+/* .task-input i{
+    position: absolute;
+    top: 50%;
+    transform: translate(17px, -50%);
+    width: 50px;
+    height: 50px;
+} */
+
 svg {
-    width: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(7px, -50%);
+    width: 30px;
+    height: 30px;
+
+}
+
+.task-input input {
+    height: 100%;
+    width: 100%;
+    padding: 0 20px 0 53px;
+    outline: none;
+    font-size: 18px;
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+
+.task-input input::placeholder {
+    color: #bfbfbf;
+}
+
+/* CONTROL DIV  */
+
+.control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+
+    padding: 18px 5px;
+    margin-bottom: 20PX;
+}
+
+.filter span {
+    cursor: pointer;
+    margin: 0 8px;
+    /* font-size: 17px; */
+}
+
+.filter span:first-child{
+    margin-left: 0;
+}
+
+.filter span.active{
+    color: #3c87ff;
+}
+
+.clear {
+    outline: none;
+    border: none;
+    color: #fff;
+    background-color: rgb(88, 165, 229);
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* TASK BOX  */
+
+.task-box{
+    /* margin: 20px 25px; */
+    list-style-type: none;
+}
+
+.task{
+    padding: 10px 8px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.task-box .task:last-child{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+
+label{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.content{
+    display: flex;
+    /* justify-content: space-around; */
+}
+
+.content input{
+    margin-top: 6px;
+    margin-right: 12px;
+}
+
+.setting i{
+    cursor: pointer;
 }
