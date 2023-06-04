@@ -91,11 +91,11 @@ svg {
     /* font-size: 17px; */
 }
 
-.filter span:first-child{
+.filter span:first-child {
     margin-left: 0;
 }
 
-.filter span.active{
+.filter span.active {
     color: #3c87ff;
 }
 
@@ -111,40 +111,44 @@ svg {
 
 /* TASK BOX  */
 
-.task-box{
+.task-box {
     /* margin: 20px 25px; */
     list-style-type: none;
 }
 
-.task{
+.task {
     padding: 10px 8px;
     margin-bottom: 5px;
     border-bottom: 1px solid black;
 }
 
-.task-box .task:last-child{
+.task-box .task:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: none;
 }
 
 
-label{
+label {
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
-.content{
+.content {
     display: flex;
     /* justify-content: space-around; */
 }
 
-.content input{
+.content input {
     margin-top: 6px;
     margin-right: 12px;
 }
 
-.setting i{
+.content p.checked {
+    text-decoration: line-through;
+}
+
+.setting i {
     cursor: pointer;
 }
