@@ -12,6 +12,7 @@
 
 body {
     background-color: rgb(114, 114, 199);
+    background-image: url("bg1.jpg");
     overflow: hidden;
 }
 
