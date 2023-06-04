@@ -1,14 +1,31 @@
 const taskInput = document.querySelector(".task-input input");
 taskBox = document.querySelector(".task-box");
+filters = document.querySelectorAll(".filters span");
+clearAll = document.querySelector(".clear");
 
 let editId;
 let isEdited = false;
+
+filters.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    //console.log(btn);
+
+    // ADD OR REMOVE CLASS="ACTIVE"
+
+    // TO FIRST REMOVE CLASS "ACTIVE" FROM PREVIOUS SELECTED
+    document.querySelector("span.active").classList.remove("active");
+
+    // THEN ADD CLASS "ACTIVE" TO CURRENT SELECTED
+    btn.classList.add("active");
+    showTodo(btn.id);
+  });
+});
 
 // GET LOCALSTORAGE TODO-LIST
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 
 // CONSOLE LOGGING TODO
-function showTodo() {
+function showTodo(filters) {
   let list = "";
 
   if (todos) {
@@ -19,8 +36,9 @@ function showTodo() {
       let isCompleted = todo.status == "Completed" ? "checked" : "";
       // if completed then set isCompleted value to checked
 
-      list += `<li class="task">
-                    <label for="">
+      if (filters == todo.status || filters == "all") {
+        list += `<li class="task">
+                    <label for="${id}">
                         <div class="content">
                             <input onclick="updateStatus(this)" type="checkbox" id="${id}" ${isCompleted}>
                             <p class="${isCompleted}">${todo.name}</p>
@@ -32,13 +50,15 @@ function showTodo() {
 
                     </label>
                 </li>`;
+      }
     });
   }
 
-  taskBox.innerHTML = list;
+  // IF TASK IS THERE THEN SHOW THE LIST or else IF THERE IS NO TASK THEN SHOW THE SPAN
+  taskBox.innerHTML = list || `<span>No Task here!</span>`;
 }
 
-showTodo();
+showTodo("all");
 
 // FUNCTION TO UPDATE STATUS
 function updateStatus(selectedTask) {
@@ -61,9 +81,8 @@ function updateStatus(selectedTask) {
 }
 
 // FUNCTION TO DELETE TASK
-
 function deleteTask(deleteId) {
-  console.log(deleteId);
+  // console.log(deleteId);
 
   // REMOVE SELECTED TASK FROM ARRAY OR TODOS
   todos.splice(deleteId, 1);
@@ -72,11 +91,10 @@ function deleteTask(deleteId) {
   localStorage.setItem("todo-list", JSON.stringify(todos));
 
   // SHOW THE UPDATED TASK BOX AGAIN
-  showTodo();
+  showTodo("all");
 }
 
 // FUNCTION TO EDIT TASK
-
 function editTask(taskId, taskName) {
   // console.log(taskId);
 
@@ -85,37 +103,44 @@ function editTask(taskId, taskName) {
   taskInput.value = taskName;
 }
 
+// FUNCTION TO CLEAR ALL TASK
+clearAll.addEventListener("click", () => {
+  // REMOVE ALL ITEMS FROM ARRAY OR TODOS
+  todos.splice(0, todos.length);
+
+  // UPDATE THE TODOS ARRAY AGAIN INTO THE LOCALHOST
+  localStorage.setItem("todo-list", JSON.stringify(todos));
+
+  // SHOW THE UPDATED TASK BOX AGAIN
+  showTodo("all");
+});
+
+// MAIN FUNCTION TO TAKE INPUT TASK
 taskInput.addEventListener("keyup", (e) => {
   let userTask = taskInput.value.trim();
 
   if (e.key == "Enter" && userTask) {
-    // console.log(userTask)
-
-    // IF isEdited IS FALSE
     if (!isEdited) {
+      // IF isEdited IS FALSE
+
       if (!todos) {
-        todos = [];
-        // IF TODOS IS EMPTY THEN PASS EMPTY ARRAY TO TODOS
+        todos = []; // IF TODOS IS EMPTY THEN PASS EMPTY ARRAY TO TODOS
       }
 
-      let taskInfo = { name: userTask, status: "pending" };
+      let taskInfo = { name: userTask, status: "Pending" };
 
       // ADD NEW TASK
       todos.push(taskInfo);
-    }
-
-    // IF isEdited TRUE
-    else {
+    } else {
+      // IF isEdited TRUE
       isEdited = false;
       todos[editId].name = userTask;
     }
 
     // SETTING TASK INPUT VALUE TO EMPTY AGAIN
     taskInput.value = "";
-
     localStorage.setItem("todo-list", JSON.stringify(todos));
-
     // MAKE IT APPEAR ON TASKBOX
-    showTodo();
+    showTodo("all");
   }
 });
